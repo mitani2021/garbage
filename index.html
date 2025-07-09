@@ -42,7 +42,7 @@
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
-      const response = await fetch("【ここにデプロイURLを記入】", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzs2cyjcPg_zV0PEhsREE3Rt1fKea3ThSZ-W7JQRNrv5P9kI8UCVzqfSd6NTLA-SG7W/exec", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
