@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ワークショップアンケート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>ワークショップ アンケート</h1>
+
+  <form id="form">
+    <label>今日のワークショップであなたが演じた人を教えてください：</label><br>
+    <select name="role" required>
+      <option value="">選択してください</option>
+      <option value="A">Ａさん</option>
+      <option value="B">Ｂさん</option>
+      <option value="C">Ｃさん</option>
+      <option value="D">Ｄさん</option>
+      <option value="E">Ｅさん</option>
+      <option value="F">Ｆさん</option>
+      <option value="G">Ｇさん</option>
+      <option value="H">Ｈさん</option>
+    </select><br><br>
+
+    <label>あなたが演じた人は、納得のいく話し合いができたと思いますか？</label><br>
+    <input type="radio" name="discussion" value="agree" required> 納得できた<br>
+    <input type="radio" name="discussion" value="disagree"> 納得できなかった<br><br>
+
+    <label>あなたが演じた人は、最終決定に満足していますか？</label><br>
+    <input type="radio" name="satisfaction" value="agree" required> 満足している<br>
+    <input type="radio" name="satisfaction" value="disagree"> 満足していない<br><br>
+
+    <button type="submit">送信</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    const form = document.getElementById("form");
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch("【ここにデプロイURLを記入】", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (response.ok) {
+        document.getElementById("message").innerText = "送信しました。ご協力ありがとうございました！";
+        form.reset();
+      } else {
+        document.getElementById("message").innerText = "送信に失敗しました。";
+      }
+    });
+  </script>
+</body>
+</html>
